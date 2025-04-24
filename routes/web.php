@@ -21,10 +21,12 @@ Route::middleware('auth')->group(function () {
 
 
 Route::get('/todo', [TodoCOntroller::class, 'index'])->name('todo.index');
+Route::get('/todo', [TodoCOntroller::class, 'store'])->name('todo.store');
 Route::get('/todo/create', [TodoCOntroller::class, 'create'])->name('todo.create');
 Route::get('/todo/edit', [TodoCOntroller::class, 'edit'])->name('todo.edit');
 
 Route::get('/user', [UserController::class, 'index'])->name('user.index');
 
+Route::resource('todo', TodoCOntroller::class);
 
 require __DIR__.'/auth.php';
