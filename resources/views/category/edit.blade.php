@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
+            {{ __('Edit Category') }}
         </h2>
     </x-slot>
 
@@ -9,13 +9,13 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("Edit Todo Page") }}
+                    {{ __("Edit Category Page") }}
                 </div>
 
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <form method="post" action="{{ route('todo.update', $todo) }}" class="">
+                    <form method="post" action="{{ route('category.update', $category->id) }}">
                         @csrf
-                        @method('patch')
+                        @method('put')
 
                         {{-- Input Title --}}
                         <div class="mb-6">
@@ -25,7 +25,7 @@
                                 name="title" 
                                 type="text" 
                                 class="mt-1 block w-full" 
-                                :value="old('title', $todo->title)" 
+                                :value="old('title', $category->title)" 
                                 required 
                                 autofocus 
                                 autocomplete="title" 
@@ -33,23 +33,10 @@
                             <x-input-error class="mt-2" :messages="$errors->get('title')" />
                         </div>
 
-                        {{-- Select Category --}}
-                        <div class="mb-6">
-                            <x-input-label for="category_id" :value="__('Category')" />
-                            <x-select name="category_id" id="category_id" class="mt-1 block w-full">
-                                @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}" {{ $category->id == old('category_id', $todo->category_id) ? 'selected' : '' }}>
-                                        {{ $category->title }}
-                                    </option>
-                                @endforeach
-                            </x-select>
-                            <x-input-error class="mt-2" :messages="$errors->get('category_id')" />
-                        </div>
-
                         {{-- Buttons --}}
                         <div class="flex items-center gap-4">
                             <x-primary-button>{{ __('Save') }}</x-primary-button>
-                            <x-cancel-button href="{{ route('todo.index') }}" />
+                            <x-cancel-button href="{{ route('category.index') }}" />
                         </div>
                     </form>
                 </div>

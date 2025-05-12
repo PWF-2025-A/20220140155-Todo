@@ -4,11 +4,10 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\Todo;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Category;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,8 +16,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
+        // Buat 1 user admin
         User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@admin.com',
@@ -28,7 +26,13 @@ class DatabaseSeeder extends Seeder
             'is_admin' => true,
         ]);
 
+        // Buat 100 user biasa
         User::factory(100)->create();
-        Todo::factory(500)->create();
+
+        // Buat 5 kategori
+        Category::factory(5)->create();
+
+        // Buat 500 todo yang otomatis terhubung ke category lewat factory
+        Todo::factory(200)->create();
     }
 }
