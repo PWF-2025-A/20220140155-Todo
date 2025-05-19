@@ -17,7 +17,7 @@ class TodoController extends Controller
         }
 
         // Mengambil todos berdasarkan user yang sedang login
-        $todos = Todo::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+        $todos = Todo::with('category')->where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
         
         // Menghitung jumlah todos yang sudah selesai
         $todosCompleted = Todo::where('user_id', Auth::user()->id)
